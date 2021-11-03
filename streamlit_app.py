@@ -18,11 +18,11 @@ def space(num_lines=1):
         st.write("")
 
 
-st.set_page_config(layout="centered", page_icon="", page_title="Stocks analysis")
+st.set_page_config(layout="centered", page_icon="💬", page_title="Commenting app")
 
 # Data visualisation part
 
-st.title("Stocks analysis")
+st.title("💬 Commenting app")
 
 source = data.stocks()
 all_symbols = source.symbol.unique()
