@@ -1,8 +1,13 @@
+import socket
+
+import google_auth_httplib2
+import httplib2
 import pandas as pd
 import streamlit as st
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
-import socket    
+from googleapiclient.http import HttpRequest
+
 socket.setdefaulttimeout(15 * 60)
 
 SCOPE = "https://www.googleapis.com/auth/spreadsheets"
@@ -19,7 +24,22 @@ def connect():
         scopes=[SCOPE],
     )
 
-    service = build("sheets", "v4", credentials=credentials)
+    # Create a new Http() object for every request
+    def build_request(http, *args, **kwargs):
+        new_http = google_auth_httplib2.AuthorizedHttp(
+            credentials, http=httplib2.Http()
+        )
+        return HttpRequest(new_http, *args, **kwargs)
+
+    authorized_http = google_auth_httplib2.AuthorizedHttp(
+        credentials, http=httplib2.Http()
+    )
+    service = build(
+        "sheets",
+        "v4",
+        requestBuilder=build_request,
+        http=authorized_http,
+    )
     gsheet_connector = service.spreadsheets()
     return gsheet_connector
 
