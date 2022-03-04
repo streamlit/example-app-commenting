@@ -1,10 +1,7 @@
-import streamlit as st
-import altair as alt
-import pandas as pd
-from vega_datasets import data
-from google.oauth2 import service_account
-from googleapiclient.discovery import build
 from datetime import datetime
+
+import streamlit as st
+from vega_datasets import data
 
 from utils import chart, db
 
