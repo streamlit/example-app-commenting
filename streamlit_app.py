@@ -63,8 +63,9 @@ with st.expander("💬 Open comments"):
     submit = form.form_submit_button("Add comment")
 
     if submit:
-        date = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-        db.insert(conn, [[name, comment, date]])
-        if "just_posted" not in st.session_state:
-            st.session_state["just_posted"] = True
-        st.experimental_rerun()
+        st.success("Your comment has been added succesfully")
+#         date = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+#         db.insert(conn, [[name, comment, date]])
+#         if "just_posted" not in st.session_state:
+#             st.session_state["just_posted"] = True
+#         st.experimental_rerun()
